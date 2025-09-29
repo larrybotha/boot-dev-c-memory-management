@@ -128,6 +128,8 @@ Learnings and annotations from boot.dev's
 
 ## Chapter 3 - pointers
 
+- the size of pointers is determined by the architecture of the system the
+    process is running on, but it is always consistent within the process
 - variables are human-readable names that refer to data in memory
 - memory is a contiguous array of bytes assigned to a process, where
     the data is stored
@@ -150,8 +152,52 @@ Learnings and annotations from boot.dev's
 - arrays have a fixed size in C, have contiguous memory locations for values, and
     are homogenous
 - arrays in C act as pointers to the first value in the array
+    - e.g.
+        ```c
+        int xs[3] = {1,2,3};
+        int *p1 = xs; // NOTE: no '&' - xs and p1 are equivalent
+        int *p2_a = &xs[1];
+        int *p2_b = (xs + 1); // p2_a and p2_b reference the same address
+        ```
+    - see [./03/09-arrays-as-pointers/test.c](./03/09-arrays-as-pointers/test.c)
+- one can advance a pointer `n` memory addresses using pointer arithmetic:
     ```c
-    ```
+    int xs[3] = {1,2,3};
+    int *ptr = xs;
 
+    printf("%d\n", *ptr); // 1
+
+    ptr += 1;
+
+    printf("%d\n", *ptr); // 2
+    ```
+    - see [./03/09-arrays-as-pointers/example.c](./03/09-arrays-as-pointers/example.c)
+- values in arrays can be accessed in a number of ways:
+    * using `[n]` indexing
+        - `xs[2]`
+    - derefering a pointer pointing to the `n`th value in the array
+        * `*xs_ptr`
+    * be dereferencing the pointer `n` memory units from the pointer to the first
+        value in the array
+        + `*(xs + 2)`
+- an array of structs containing only integers can be cast to an array of
+    integers
+    * see [./03/11-array-casting/main.c](./03/11-array-casting/main.c)
+- an array is not only a pointer to the first value in the array, it is also
+    a block of memory that holds all the elements of that array
+- [arrays decay to pointers](https://port70.net/~nsz/c/c11/n1570.html#6.3.2.1)
+    i.e. arrays 'become' a pointer to the first item     in the array
+- arrays decay to pointers when used in expressions containing pointers:
+
+    ```c
+    int xs[3];              // declared but not initialised
+    int *ptr = xs;          // no need to use the address operator
+    int value = *(xs + 2);  // using pointer arithmetic results in decay
+    ```
+- arrays do not decay when:
+    - using `sizeof`
+    - using the `&` address-of operator - this is a pointer to the whole array,
+        not the first item in the array
+    - when initialised - it is fully allocated in memory and doesn't decay
 
 
