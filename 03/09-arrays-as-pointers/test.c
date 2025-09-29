@@ -2,8 +2,8 @@
 
 #include "../../munit/munit.h"
 
-MunitResult test_change_cpp_to_python(const MunitParameter params[],
-                                      void *user_data_or_fixture) {
+MunitResult test_array_as_pointer(const MunitParameter params[],
+                                  void *user_data_or_fixture) {
   int xs[5] = {1, 2, 3, 4, 5};
   int *xs_ptr = xs;
 
@@ -14,11 +14,24 @@ MunitResult test_change_cpp_to_python(const MunitParameter params[],
   return MUNIT_OK;
 }
 
+MunitResult test_non_zero_index_pointer(const MunitParameter params[],
+                                        void *user_data_or_fixture) {
+  int xs[5] = {1, 2, 3, 4, 5};
+  int *xs_ptr_a = &xs[2];
+  int *xs_ptr_b = xs + 2;
+
+  munit_assert_ptr_equal(&xs[2], xs_ptr_a);
+  munit_assert_ptr_equal(xs_ptr_a, xs_ptr_b);
+  munit_assert_int((*xs + 2), ==, *xs_ptr_a);
+
+  return MUNIT_OK;
+}
+
 int main(int argc, char *argv[]) {
   MunitTest tests[] = {
       {
-          "/test_change_cpp_to_python",
-          test_change_cpp_to_python,
+          "/test_array_as_pointer",
+          test_array_as_pointer,
           NULL,
           NULL,
           MUNIT_TEST_OPTION_NONE,

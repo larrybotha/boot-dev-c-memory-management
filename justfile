@@ -29,7 +29,15 @@ ch-03-06:
   just watch 03/06-pointer-basics/main.c \
     "03/06-pointer-basics/exercise.c munit/munit.c"
 
-ch-03-09:
-  just watch 03/09-arrays-as-pointers/main.c \
+ch-03-09-test:
+  just watch 03/09-arrays-as-pointers/test.c \
     "munit/munit.c"
 
+ch-03-09-example:
+  just watch 03/09-arrays-as-pointers/example.c
+
+ch-03-11:
+  just watch 03/11-array-casting/main.c
+
+ch-03-13:
+  just watch 03/13-arrays-decay-to-pointers/main.c
