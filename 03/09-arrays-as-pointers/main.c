@@ -7,9 +7,9 @@ MunitResult test_change_cpp_to_python(const MunitParameter params[],
   int xs[5] = {1, 2, 3, 4, 5};
   int *xs_ptr = xs;
 
-  printf("xs: %p\n", xs);
-  printf("xs_ptr: %p\n", xs_ptr);
-  /*munit_assert_int(xs, ==, xs_ptr);*/
+  // xs is a pointer to the first value in the array
+  munit_assert_ptr_equal(xs, &xs[0]);
+  munit_assert_ptr_equal(xs, xs_ptr);
 
   return MUNIT_OK;
 }
