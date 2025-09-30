@@ -41,3 +41,12 @@ ch-03-11:
 
 ch-03-13:
   just watch 03/13-arrays-decay-to-pointers/main.c
+
+ch-03-14-example:
+  just watch 03/14-c-strings/main.c
+
+ch-03-14-test:
+  just watch 03/14-c-strings/test.c \
+    "03/14-c-strings/exercise.c munit/munit.c"
+
+
