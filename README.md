@@ -186,7 +186,7 @@ Learnings and annotations from boot.dev's
 - an array is not only a pointer to the first value in the array, it is also
     a block of memory that holds all the elements of that array
 - [arrays decay to pointers](https://port70.net/~nsz/c/c11/n1570.html#6.3.2.1)
-    i.e. arrays 'become' a pointer to the first item     in the array
+    i.e. arrays 'become' a pointer to the first item in the array
 - arrays decay to pointers when used in expressions containing pointers:
 
     ```c
@@ -194,10 +194,11 @@ Learnings and annotations from boot.dev's
     int *ptr = xs;          // no need to use the address operator
     int value = *(xs + 2);  // using pointer arithmetic results in decay
     ```
+- arrays decay to pointers when passed as arguments to functions
+    * see [./03/13-arrays-decay-to-pointers/main.c](./03/13-arrays-decay-to-pointers/main.c)
 - arrays do not decay when:
     - using `sizeof`
     - using the `&` address-of operator - this is a pointer to the whole array,
         not the first item in the array
     - when initialised - it is fully allocated in memory and doesn't decay
-
 

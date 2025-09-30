@@ -1,17 +1,33 @@
 #include <stdio.h>
 
-void core_utils_func(int core_utilization[]) {
-  printf("sizeof core_utilization: %zu\n", sizeof(*core_utilization));
+// arrays decay to pointers when passed as values to functions
+void some_func(int xs_as_arg[]) {
+  printf("xs as arg to func:\n");
+  printf("&xs_as_arg: %p\n",
+         &xs_as_arg);                   // address of the _pointer_ to xs_as_arg
+  printf("xs_as_arg: %p\n", xs_as_arg); // address of xs_as_arg
+
+  // size of the _pointer_ to xs_as_arg
+  printf("sizeof xs_as_arg in some_func: %zu\n", sizeof(*xs_as_arg));
 }
 
 int main() {
-  int core_utilization[] = {43, 67, 89, 92, 71, 43, 56, 12};
-  int len = sizeof(core_utilization) / sizeof(core_utilization[0]);
+  int xs[] = {43, 67, 89, 92, 71, 43, 56, 12};
+  int len = sizeof(xs) / sizeof(xs[0]);
 
-  printf("sizeof of core_utilization: %zu\n", sizeof(core_utilization));
-  printf("len of core_utilization: %d\n", len);
+  // xs decays to a pointer, as if we used xs&
+  printf("&xs: %p\n", &xs);
+  printf("xs: %p\n", xs);
 
-  core_utils_func(core_utilization);
+  // xs does not decay when passed to sizeof, otherwise we'd get the
+  // size of the pointer
+  printf("sizeof of xs: %zu\n", sizeof(xs));
+  printf("len of xs: %d\n", len);
+
+  printf("\n");
+
+  // xs decays to a pointer here
+  some_func(xs);
 
   return 0;
 }
