@@ -201,4 +201,33 @@ Learnings and annotations from boot.dev's
     - using the `&` address-of operator - this is a pointer to the whole array,
         not the first item in the array
     - when initialised - it is fully allocated in memory and doesn't decay
+- a C-string, i.e. `char *msg = "foo";`:
+    - is how text is represented in C
+    - is a pointer to the first character in an element array
+    - is terminated by the `NUL` byte, `\0`
+- strings do not store their length - the length is determined by the position of
+    the null terminator
+    * `strlen` iterates over the strings until it gets to the null terminator
+    - due to the lack of a stored length, working with strings must be done
+        with care in order to avoid buffer overflows and off-by-one errors
+- strings can be declared either using arrays or pointers:
+
+    ```c
+    char *str1 = "foo";
+    char str1[] = "bar";
+    ```
+- given the following:
+
+    ```c
+    char str1[50] = "foo";
+    char *str2 = "bar";
+
+    strcat(str1, str2); // foobar
+    ```
+
+    - The initial memory representation of `str1` would be 50 bytes
+    - `strcat` doesn't have the length of `str1`, but the null terminator
+        indicates _where_ the string ends
+    - the null terminator is used to ensure that only the characters up to
+        the null terminator are used for concatenation
 
