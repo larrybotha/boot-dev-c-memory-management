@@ -2,12 +2,19 @@
 
 int main() {
   int xs[4] = {1, 2, 3, 4};
-  int *ptr = xs;
+  const int *ptr = xs;
+  int *ptr2 = xs;
   int len = sizeof(xs) / sizeof(int);
 
   // items in array are allocated addresses in memory contiguously
   for (int i = 0; i < len; i++) {
     printf("address of xs at %d == %p\n", i, &xs[i]);
+    printf("(ptr2 + %d) == %p\n", i, ptr2);
+
+    // increment the pointer for the next iteration
+    if (i < len - 1) {
+      ptr2 += 1;
+    }
   }
 
   printf("\n");
