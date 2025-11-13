@@ -6,8 +6,13 @@ int main() {
   int *ptr2 = xs;
   int len = sizeof(xs) / sizeof(int);
 
+  printf("sizeof(ptr): %zu\n", sizeof(ptr));
+  printf("address of pointer moves by size of type: %zu\n\n", sizeof(int));
+
   // items in array are allocated addresses in memory contiguously
   for (int i = 0; i < len; i++) {
+    printf("     value at xs[%d] == %d\n", i, xs[i]);
+    printf("value at *(ptr + %d) == %d\n", i, *ptr2);
     printf("address of xs at %d == %p\n", i, &xs[i]);
     printf("        (ptr2 + %d) == %p\n\n", i, ptr2);
 
