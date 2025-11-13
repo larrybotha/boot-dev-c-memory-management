@@ -184,6 +184,7 @@ Learnings and annotations from boot.dev's
   printf("%d\n", *ptr); // 2
   ```
 
+  - the addresses of pointers move by the size of the data type they point to
   - see [./03/09-arrays-as-pointers/example.c](./03/09-arrays-as-pointers/example.c)
 
 - values in arrays can be accessed in a number of ways:
@@ -204,7 +205,7 @@ Learnings and annotations from boot.dev's
 - arrays decay to pointers when used in expressions containing pointers:
 
   ```c
-  int xs[3];              // declared but not initialised
+  int xs[3];              // when declared but not initialised
   int *ptr = xs;          // no need to use the address operator
   int value = *(xs + 2);  // using pointer arithmetic results in decay
   ```
