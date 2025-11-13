@@ -7,19 +7,24 @@ typedef struct Graphics {
   int width;
 } graphics_t;
 
-void dump_graphis_unsafe(graphics_t settings[10]) {
+void dump_graphics_unsafe(graphics_t settings[10]) {
   // cast to an array of integers
-  int *ptr = (int *)settings;
+  const int *ptr = (int *)settings;
 
+  // iterate over an arbitrary length
   for (int i = 0; i < 20; i++) {
+    // once settings is consumed, we start seeing other values in memory
     printf("settings[%d] = %d\n", i, ptr[i]);
   }
 }
 
-void dump_graphis(graphics_t settings[10]) {
+void dump_graphics(graphics_t settings[10]) {
+  // cast to an array of integers
   int *ptr = (int *)settings;
+  // get the size of the array
   int len = sizeof(ptr);
 
+  // iterate over a known length
   for (int i = 0; i < len; i++) {
     printf("settings[%d] = %d\n", i, ptr[i]);
   }
@@ -32,9 +37,9 @@ int main() {
       {100, 200, 300},
   };
 
-  dump_graphis_unsafe(xs);
+  dump_graphics_unsafe(xs);
 
   printf("\n");
 
-  dump_graphis(xs);
+  dump_graphics(xs);
 }
