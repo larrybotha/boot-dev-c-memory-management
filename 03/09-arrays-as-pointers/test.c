@@ -7,9 +7,10 @@ MunitResult test_array_as_pointer(const MunitParameter params[],
   int xs[5] = {1, 2, 3, 4, 5};
   int *xs_ptr = xs;
 
-  // xs is a pointer to the first value in the array
-  munit_assert_ptr_equal(xs, &xs[0]);
+  // xs is a pointer to an array
   munit_assert_ptr_equal(xs, xs_ptr);
+  // the address of the first value is the same as the pointer to the array
+  munit_assert_ptr_equal(&xs[0], xs_ptr);
 
   return MUNIT_OK;
 }
