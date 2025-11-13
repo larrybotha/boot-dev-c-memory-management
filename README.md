@@ -152,7 +152,7 @@ Learnings and annotations from boot.dev's
   - modifying a struct passed into a function will leave the original intact
   - a struct returned from a function will have a different address to
     the one passed in
-- to modify a struct using a function, on needs to pass a _pointer_ to the struct
+- to modify a struct using a function, one needs to pass a _pointer_ to the struct
 - accessing a struct's properties via a pointer can be done in two ways:
   - using the arrow syntax: `ptr->x`
   - by dereferencing the ptr: `(*ptr).x`
