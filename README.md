@@ -211,7 +211,35 @@ Learnings and annotations from boot.dev's
   ```
 
 - arrays decay to pointers when passed as arguments to functions
+
+  ```c
+  #include <stdio.h>
+
+  func implicit_sig(const int xs[]) {
+    // xs is an array of ints... but because it _decays_ to a pointer,
+    // the signature for do_y is more representative of that decay
+
+    printf("sizeof(xs): %zu\n" sizeof(xs)); // => 8 (size of pointer)
+  }
+
+  func explicit_sig(const int *xs) {
+    // xs is a pointer to an int
+
+    printf("sizeof(xs): %zu\n" sizeof(xs)); // => 8 (size of pointer)
+  }
+
+  func main() {
+    int xs[] = {1,2,3};
+
+    printf("sizeof(xs): %zu\n" sizeof(xs)); // => 3
+
+    implicit_sig(xs);
+    explicit_sig(xs);
+  }
+  ```
+
   - see [./03/13-arrays-decay-to-pointers/main.c](./03/13-arrays-decay-to-pointers/main.c)
+
 - arrays do not decay when:
   - using `sizeof`
   - using the `&` address-of operator - this is a pointer to the whole array,
