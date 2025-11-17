@@ -48,3 +48,7 @@ ch-03-14-example:
 ch-03-14-test:
     just watch 03/14-c-strings/test.c \
       "03/14-c-strings/exercise.c munit/munit.c"
+
+ch-03-15-test:
+    just watch 03/15-c-string-library/test.c \
+      "03/15-c-string-library/exercise.c munit/munit.c"
