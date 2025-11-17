@@ -245,6 +245,30 @@ Learnings and annotations from boot.dev's
   - using the `&` address-of operator - this is a pointer to the whole array,
     not the first item in the array
   - when initialised - it is fully allocated in memory and doesn't decay
+- the pointers for an array and the first item in an array point to the same
+  address, but they behave differently:
+
+  ```c
+  #include <stdio.h>
+  #include <assert.h>
+
+  int main() {
+    int xs[] = {1,2,3};
+
+    // address of first item using & operator and pointer arithmetic
+    // is the same
+    for (int i = 0; i < len; i++) {
+      assert(&xs[i] == (xs + i));
+    }
+
+    // address at xs is same as &xs[0]
+    assert((void *)xs == (void *)&xs[0]);
+
+    // address at &xs is same as &xs[0]
+    assert((void *)(&xs) == (void *)&xs[0]);
+  }
+  ```
+
 - a C-string, i.e. `char *msg = "foo";`:
   - is how text is represented in C
   - is a pointer to the first character in an element array
