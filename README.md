@@ -278,6 +278,7 @@ Learnings and annotations from boot.dev's
   - `strlen` iterates over the strings until it gets to the null terminator
   - due to the lack of a stored length, working with strings must be done
     with care in order to avoid buffer overflows and off-by-one errors
+  - the null terminator does not count towards the length of a string
 - strings can be declared either using arrays or pointers:
 
   ```c
