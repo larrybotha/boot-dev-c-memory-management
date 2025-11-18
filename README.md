@@ -301,5 +301,13 @@ Learnings and annotations from boot.dev's
   - the null terminator is used to ensure that only the characters up to
     the null terminator are used for concatenation
 
-- using `strcat` on an uninitialised string is undefined behaviour - use `strcat`
-  instead
+- string methods:
+  - `strlen` - get the length of a string up until and excluding the null terminator
+  - `strcat` - append src onto dest
+    - _do not use on uninitialised string_; undefined behaviour
+  - `strncat` - append n chars from src onto dest
+  - `strcpy` - copy a src into a destination - safe for uninitialised strings
+  - `strncpy` - copy n chars from src to dest
+  - `strcmp` - compares two strings
+  - `strchr` - returns a pointer to the first occurrence of char in string
+  - `strstr` - returns a pointer to the first occurrence of substring in string
