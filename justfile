@@ -55,3 +55,7 @@ ch-03-15-example:
 ch-03-15-test:
     just watch 03/15-c-string-library/test.c \
       "03/15-c-string-library/exercise.c munit/munit.c"
+
+ch-03-16-test:
+    just watch 03/16-forward-declarations/test.c \
+      "03/16-forward-declarations/exercise.c munit/munit.c"

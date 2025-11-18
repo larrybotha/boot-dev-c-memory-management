@@ -311,3 +311,20 @@ Learnings and annotations from boot.dev's
   - `strcmp` - compares two strings
   - `strchr` - returns a pointer to the first occurrence of char in string
   - `strstr` - returns a pointer to the first occurrence of substring in string
+
+### Forward declarations
+
+A forward declaration allows one to define types that reference themselves, or to
+be used recursively
+
+They are composed of 2 parts - the forward declaration itself, which
+is a struct without any fields, and the struct that references itself:
+
+```c
+typedef struct Node node_t;
+
+typedef struct Node {
+  int value;
+  next *next;
+}
+```
