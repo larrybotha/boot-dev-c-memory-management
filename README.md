@@ -300,3 +300,6 @@ Learnings and annotations from boot.dev's
     indicates _where_ the string ends
   - the null terminator is used to ensure that only the characters up to
     the null terminator are used for concatenation
+
+- using `strcat` on an uninitialised string is undefined behaviour - use `strcat`
+  instead
