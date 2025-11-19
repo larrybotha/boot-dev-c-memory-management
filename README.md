@@ -328,3 +328,20 @@ typedef struct Node {
   next *next;
 }
 ```
+
+### Mutual structs
+
+Structs may have circular dependencies, in which multiple forward declarations can
+allow for the references
+
+```c
+typedef struct A a_t;
+typedef struct B b_t;
+
+typedef struct A {
+  b_t *b;
+} a_t;
+typedef struct B {
+  a_t *a;
+} b_t;
+```
