@@ -66,4 +66,4 @@ ch-03-17-test:
 
 ch-03-18-test:
     just watch 03/18-enums/test.c \
-      "munit/munit.c"
+      "03/18-enums/exercise.c munit/munit.c"
