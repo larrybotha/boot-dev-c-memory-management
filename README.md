@@ -345,3 +345,19 @@ typedef struct B {
   a_t *a;
 } b_t;
 ```
+
+### Enums
+
+Go seems to have been inspired by C's approach for enums:
+
+```c
+typedef enum State {
+  A,
+  B,
+  C
+} state_t;
+
+// A => 1
+// B => 2
+// C => 3
+```

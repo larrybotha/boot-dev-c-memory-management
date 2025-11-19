@@ -63,3 +63,7 @@ ch-03-16-test:
 ch-03-17-test:
     just watch 03/17-mutual-structs/test.c \
       "03/17-mutual-structs/exercise.c munit/munit.c"
+
+ch-03-18-test:
+    just watch 03/18-enums/test.c \
+      "munit/munit.c"
