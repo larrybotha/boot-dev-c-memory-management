@@ -59,3 +59,7 @@ ch-03-15-test:
 ch-03-16-test:
     just watch 03/16-forward-declarations/test.c \
       "03/16-forward-declarations/exercise.c munit/munit.c"
+
+ch-03-17-test:
+    just watch 03/17-mutual-structs/test.c \
+      "03/17-mutual-structs/exercise.c munit/munit.c"
