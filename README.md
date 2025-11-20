@@ -346,7 +346,7 @@ typedef struct B {
 } b_t;
 ```
 
-### Enums
+## Enums
 
 Go seems to have been inspired by C's approach for enums:
 
