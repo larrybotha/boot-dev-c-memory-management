@@ -71,3 +71,8 @@ ch-04-01-test:
 ch-04-02-test:
     just watch 04/02-non-default-values/test.c \
       "munit/munit.c"
+
+ch-04-03-test:
+    just watch 04/03-switch/test.c \
+      "04/03-switch/exercise.c munit/munit.c"
+
