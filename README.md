@@ -3,7 +3,7 @@
 Learnings and annotations from boot.dev's
 [C Memory Management course](https://www.boot.dev/lessons/44a4421c-cc49-4472-bbad-a14f81f860b4)
 
-## Chapter 1 - C Basics
+## [01 - C Basics](./01/)
 
 - `void`:
   - as a function parameter, signifies explicitly that no arguments are taken
@@ -51,7 +51,7 @@ Learnings and annotations from boot.dev's
     system's largest non-struct type
   - `%zu` is used for printing the result from `sizeof`
 
-## Chapter 2 - Structs
+## [02 - Structs](./02/)
 
 - structs may be initialised in a number of ways:
   - with a zero initialiser
@@ -133,7 +133,7 @@ Learnings and annotations from boot.dev's
   - prefer ordering struct properties from largest to smallest to
     assist the compiler in minimising padding
 
-## Chapter 3 - pointers
+## [03 - Pointers](./03/)
 
 - the size of pointers is determined by the architecture of the system the
   process is running on, but it is always consistent within the process
@@ -346,7 +346,7 @@ typedef struct B {
 } b_t;
 ```
 
-## Enums
+## [04 - Enums](./04/)
 
 Go seems to have been inspired by C's approach for enums:
 
@@ -376,7 +376,7 @@ typedef enum HttpStatus {
 `sizeof(int)`, but if enum values are too large to be represented by `int`,
 `unsigned long` or `long` may be used
 
-## Union
+## [05 - Unions](./05/)
 
 Unions are somewhat like sum-types - they can represent different types,
 but unlike structs, can only hold one of those types at a time.
@@ -384,18 +384,20 @@ but unlike structs, can only hold one of those types at a time.
 The C compiler uses all the fields in the union to determine the maximum size
 of the type.
 
-When working with unions, it's important to access only the fields for the
-union that were set for that union. Accessing fields that were not set when
-initialised is undefined behaviour.
+- when working with unions, it's important to access only the fields for the
+  union that were set for that union. Accessing fields that were not set when
+  initialised is undefined behaviour.
 
-e.g. for the following union:
+  e.g. for the following union:
 
-```c
-typedef union {
-  int age;
-  char *name;
-} age_or_name_t;
-```
+  ```c
+  typedef union {
+    int age;
+    char *name;
+  } age_or_name_t;
+  ```
+
+  If `.name` was set at init, one should stick to accessing `.name`.
 
 - all fields in a union share the same allocated memory - for this reason,
   accessing any field in a union which is not the value that was set is
