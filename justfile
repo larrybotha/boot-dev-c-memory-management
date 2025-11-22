@@ -76,3 +76,5 @@ ch-04-03-test:
     just watch 04/03-switch/test.c \
       "04/03-switch/exercise.c munit/munit.c"
 
+ch-04-04-example:
+    just watch 04/04-sizeof-enum/main.c

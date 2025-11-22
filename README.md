@@ -371,3 +371,7 @@ typedef enum HttpStatus {
   HTTP_NOT_FOUND = 404,
 } http_status_t;
 ```
+
+`sizeof` works on enums as with other types. It's _generally_ equivalent to
+`sizeof(int)`, but if enum values are too large to be represented by `int`,
+`unsigned long` or `long` may be used
