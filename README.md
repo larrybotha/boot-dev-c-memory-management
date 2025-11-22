@@ -361,3 +361,13 @@ typedef enum State {
 // B => 2
 // C => 3
 ```
+
+Non-default values can be provided:
+
+```c
+typedef enum HttpStatus {
+  HTTP_OK = 200,
+  HTTP_CREATED, // incremented value == 201
+  HTTP_NOT_FOUND = 404,
+} http_status_t;
+```

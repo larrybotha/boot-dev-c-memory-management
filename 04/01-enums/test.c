@@ -42,11 +42,7 @@ int main(int argc, const char *argv[]) {
   };
 
   MunitSuite suite = {
-      "mutual-structs",
-      tests,
-      NULL,
-      1,
-      (MunitSuiteOptions)MUNIT_TEST_OPTION_NONE,
+      "enums", tests, NULL, 1, (MunitSuiteOptions)MUNIT_TEST_OPTION_NONE,
   };
 
   return munit_suite_main(&suite, NULL, argc, (char *const *)argv);

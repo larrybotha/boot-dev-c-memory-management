@@ -67,3 +67,7 @@ ch-03-17-test:
 ch-04-01-test:
     just watch 04/01-enums/test.c \
       "04/01-enums/exercise.c munit/munit.c"
+
+ch-04-02-test:
+    just watch 04/02-non-default-values/test.c \
+      "munit/munit.c"
