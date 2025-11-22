@@ -78,3 +78,7 @@ ch-04-03-test:
 
 ch-04-04-example:
     just watch 04/04-sizeof-enum/main.c
+
+ch-05-01-test:
+    just watch 05/01-union/test.c \
+      "05/01-union/exercise.c munit/munit.c"

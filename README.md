@@ -375,3 +375,30 @@ typedef enum HttpStatus {
 `sizeof` works on enums as with other types. It's _generally_ equivalent to
 `sizeof(int)`, but if enum values are too large to be represented by `int`,
 `unsigned long` or `long` may be used
+
+## Union
+
+Unions are somewhat like sum-types - they can represent different types,
+but unlike structs, can only hold one of those types at a time.
+
+The C compiler uses all the fields in the union to determine the maximum size
+of the type.
+
+When working with unions, it's important to access only the fields for the
+union that were set for that union. Accessing fields that were not set when
+initialised is undefined behaviour.
+
+e.g. for the following union:
+
+```c
+typedef union {
+  int age;
+  char *name;
+} age_or_name_t;
+```
+
+If `.name` was set at init, one should stick to accessing `.name`.
+
+_side note_: `sprintf` takes a buffer that can be written to, a string with
+format specifiers, and the values to insert into the
+format specifiers.
