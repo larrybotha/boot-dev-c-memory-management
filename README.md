@@ -397,7 +397,9 @@ typedef union {
 } age_or_name_t;
 ```
 
-If `.name` was set at init, one should stick to accessing `.name`.
+- all fields in a union share the same allocated memory - for this reason,
+  accessing any field in a union which is not the value that was set is
+  generally a bad idea
 
 _side note_: `sprintf` takes a buffer that can be written to, a string with
 format specifiers, and the values to insert into the

@@ -82,3 +82,6 @@ ch-04-04-example:
 ch-05-01-test:
     just watch 05/01-union/test.c \
       "05/01-union/exercise.c munit/munit.c"
+
+ch-05-02-example:
+    just watch 05/02-memory-layout/main.c
