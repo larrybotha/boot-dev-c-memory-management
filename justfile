@@ -92,3 +92,6 @@ ch-05-05-example:
 ch-05-05-test:
     just watch 05/05-helper-fields/test.c \
       "munit/munit.c"
+
+ch-06-01-example:
+    just watch 06/01-the-stack/main.c

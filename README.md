@@ -422,3 +422,37 @@ of the type.
 _side note_: `sprintf` takes a buffer that can be written to, a string with
 format specifiers, and the values to insert into the
 format specifiers.
+
+## [06 - Stack and heap](./06/)
+
+- the stack is composed of memory frames - the memory allocated for each function call
+- each frame contains the following information:
+  - the return address
+  - the memory allocations for arguments to the function
+  - the memory allocations for variables local to the function
+- each time a function is called, a _stack pointer_ is moved forward the appropriate
+  distance in memory from its current address to accommodate stack frame
+- each successive function call pushes a stack frame onto the stack, and each
+  time a function returns, that function's frame is popped off of the stack
+
+e.g. for the following function:
+
+```c
+void create_typist(int uses_nvim) { // 4 bytes
+  int wpm = 150; // 4 bytes
+  char name[4] = {'s', 'p', 'a', 'm'}; // 4 * 1 byte
+}
+```
+
+with the next allocatable memory address at `0x0004` we have:
+
+```text
+
+<- lower addresses                                                          -> higher addresses
+
+  | 0x0004        | 0x0008    | 0x000c | 0x0010 | 0x0011 | 0x0012 | 0x0013 |
+  | ---           | ---       | ---    | ---    | ---    | ---    | ---    |
+  | (ret address) | uses_nvim | wpm    | 's'    | 'p'    | 'a'    | 'm'    |
+
+  |<                          stack frame                                 >|
+```
