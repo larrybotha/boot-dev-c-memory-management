@@ -456,3 +456,17 @@ with the next allocatable memory address at `0x0004` we have:
 
   |<                          stack frame                                 >|
 ```
+
+- stack allocation should be preferred over heap allocation when possible:
+  - allocating to the stack is a quick increment / decrement to the stack pointer, which
+    is much cheaper than the heap having to resolve and manage addresses
+  - memory is stored contiguously on the stack. Spatial locality allows for faster
+    CPU lookups for related data
+  - memory is managed automatically - memory is allocated for each new frame, memory
+    is deallocated when each function returns
+  - thread-safe - each thread has its own stack, whereas the heap is shared across
+    threads, requiring synchronisation
+
+The Go compiler uses escape analysis to determine when stack allocation is appropriate,
+which helps make Go fast. Python, on the other hand, tends to allocate most objects to
+the heap.
