@@ -85,3 +85,10 @@ ch-05-01-test:
 
 ch-05-02-example:
     just watch 05/02-memory-layout/main.c
+
+ch-05-05-example:
+    just watch 05/05-helper-fields/main.c
+
+ch-05-05-test:
+    just watch 05/05-helper-fields/test.c \
+      "munit/munit.c"

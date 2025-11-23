@@ -402,6 +402,22 @@ of the type.
 - all fields in a union share the same allocated memory - for this reason,
   accessing any field in a union which is not the value that was set is
   generally a bad idea
+- for values that are composed of discrete parts of known sizes, a union can
+  be used to represent both the full value and its components
+
+  e.g.
+
+  ```c
+  typedef union RgbaColor {
+    struct { // 32 bits
+      uint8_t r;
+      uint8_t g;
+      uint8_t b;
+      uint8_t a;
+    } components;
+    uint32_t value; // 32 bits
+  }
+  ```
 
 _side note_: `sprintf` takes a buffer that can be written to, a string with
 format specifiers, and the values to insert into the
