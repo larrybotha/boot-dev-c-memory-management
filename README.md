@@ -431,7 +431,7 @@ format specifiers.
   - the memory allocations for arguments to the function
   - the memory allocations for variables local to the function
 - each time a function is called, a _stack pointer_ is moved forward the appropriate
-  distance in memory from its current address to accommodate stack frame
+  distance in memory from its current address to accommodate the stack frame
 - each successive function call pushes a stack frame onto the stack, and each
   time a function returns, that function's frame is popped off of the stack
 
@@ -447,25 +447,34 @@ void create_typist(int uses_nvim) { // 4 bytes
 with the next allocatable memory address at `0x0004` we have:
 
 ```text
-
-<- lower addresses                                                          -> higher addresses
-
-  | 0x0004        | 0x0008    | 0x000c | 0x0010 | 0x0011 | 0x0012 | 0x0013 |
-  | ---           | ---       | ---    | ---    | ---    | ---    | ---    |
-  | (ret address) | uses_nvim | wpm    | 's'    | 'p'    | 'a'    | 'm'    |
-
-  |<                          stack frame                                 >|
+| address | name      | value | type  | size |
+| ---     | ---       | ---   | ---   | ---  |
+| ...     |           |       |       |      |
+| 0x0004  |           |       | int * | 4    | ┐ ← return address
+| 0x0008  | uses_nvim | n     | int   | 4    | │
+| 0x000c  | wpm       | 150   | int   | 4    | │
+| 0x0010  | name[0]   | 's'   | char  | 1    | │ stack frame
+| 0x0011  | name[0]   | 'p'   | char  | 1    | │
+| 0x0012  | name[0]   | 'a'   | char  | 1    | │
+| 0x0013  | name[0]   | 'm'   | char  | 1    | ┘ ← stack pointer
+| ...     |           |       |       |      |
 ```
 
-- stack allocation should be preferred over heap allocation when possible:
-  - allocating to the stack is a quick increment / decrement to the stack pointer, which
-    is much cheaper than the heap having to resolve and manage addresses
-  - memory is stored contiguously on the stack. Spatial locality allows for faster
-    CPU lookups for related data
-  - memory is managed automatically - memory is allocated for each new frame, memory
-    is deallocated when each function returns
-  - thread-safe - each thread has its own stack, whereas the heap is shared across
-    threads, requiring synchronisation
+From this we can see:
+
+- memory is allocated contiguously
+- moving the stack pointer means incrementing or decrementing it by the size of the stack frame
+
+Stack allocations have a few performance benefits over heap allocations:
+
+- due to the increment / decrement nature of moving the stack pointer it
+  is much cheaper than the heap having to resolve and manage addresses
+- contiguous addresses for related data makes for spatial locality, resulting in
+  faster CPU lookups for that data
+- memory is managed automatically - memory is allocated for each new frame, memory
+  is deallocated when each function returns
+- thread-safe - each thread has its own stack, whereas the heap is shared across
+  threads, requiring synchronisation
 
 The Go compiler uses escape analysis to determine when stack allocation is appropriate,
 which helps make Go fast. Python, on the other hand, tends to allocate most objects to
