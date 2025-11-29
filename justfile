@@ -98,3 +98,6 @@ ch-06-01-example:
 
 ch-06-03-example:
     just watch 06/03-stack-overflow/main.c
+
+ch-06-04-example:
+    just watch 06/04-pointers-to-the-stack/main.c

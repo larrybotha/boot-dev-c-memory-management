@@ -513,3 +513,18 @@ int main() {
   do_it(1024 * 1024 * 10); // +- 10Mb
 }
 ```
+
+### Pointers to the stack
+
+Returning pointers to values created within functions results in undefined behaviour -
+those pointers end up pointing to locations in memory that have been deallocated
+
+i.e.
+
+- define a variable
+- value is assigned memory location in stack frame
+- return pointer to value
+- function exits, popping stack frame, deallocating memory
+- call-site receives address to memory that is no longer allocated
+
+See [./06/04-pointers-to-the-stack/main.c](./06/04-pointers-to-the-stack/main.c)
