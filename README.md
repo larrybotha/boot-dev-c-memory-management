@@ -479,3 +479,37 @@ Stack allocations have a few performance benefits over heap allocations:
 The Go compiler uses escape analysis to determine when stack allocation is appropriate,
 which helps make Go fast. Python, on the other hand, tends to allocate most objects to
 the heap.
+
+A limitation of allocating to the stack is its limited size - if the number of stack
+frames grows beyond the amount of memory allocated to a process's stack, you'll
+get a stack overflow
+
+The stack size limit for a system can be found using `ulimit`:
+
+```shell
+# soft stack size limit
+$ ulimit -s
+8176 # +-8Mb
+
+# hard stack size limit
+ulimit -sH
+65520 # +-64Mb
+```
+
+A single stack frame can blow the limit using too large an allocation:
+
+```c
+void do_it(int size) {
+  char chars[size]; // triggers stack overflow when compiled with gcc
+
+  chars[0] = 'a';
+}
+
+int main() {
+  // safe
+  do_it(1024 * 1024 * 7); // +- 7Mb
+
+  // causes stack overflow when compiled with gcc
+  do_it(1024 * 1024 * 10); // +- 10Mb
+}
+```

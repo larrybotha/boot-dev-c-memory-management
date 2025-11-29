@@ -95,3 +95,6 @@ ch-05-05-test:
 
 ch-06-01-example:
     just watch 06/01-the-stack/main.c
+
+ch-06-03-example:
+    just watch 06/03-stack-overflow/main.c
