@@ -615,3 +615,38 @@ It does not change the data at that memory location, and it doesn't change the
 address.
 
 Forgetting to free memory is where memory leaks come from.
+
+#### Big Endian Little Endian
+
+Endianness is the order in which bytes are stored in memory. If the most significant
+value is on the left, it is Big Endian, other it is Little Endian.
+
+e.g. for the hex value `0x12345678`
+
+```text
+Big Endian
+
+| address | value |
+| ---     | ---   |
+| ...     |       | ← lower addresses
+| 0x0004  | 0x12  | ┐ ← most significant bit
+| 0x0008  | 0x34  | │
+| 0x000c  | 0x56  | │
+| 0x0010  | 0x78  | ┘
+| ...     |       | ← higher addresses
+
+
+Little Endian
+
+| address | value |
+| ---     | ---   |
+| ...     |       | ← lower addresses
+| 0x0004  | 0x78  | ┐ ← least significant bit
+| 0x0008  | 0x56  | │
+| 0x000c  | 0x34  | │
+| 0x0010  | 0x12  | ┘
+| ...     |       | ← higher addresses
+```
+
+Most modern systems store values using the little-endian
+ordering
