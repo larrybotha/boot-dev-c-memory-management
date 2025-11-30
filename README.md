@@ -425,6 +425,8 @@ format specifiers.
 
 ## [06 - Stack and heap](./06/)
 
+### The Stack
+
 - the stack is composed of memory frames - the memory allocated for each function call
 - each frame contains the following information:
   - the return address
@@ -528,3 +530,37 @@ i.e.
 - call-site receives address to memory that is no longer allocated
 
 See [./06/04-pointers-to-the-stack/main.c](./06/04-pointers-to-the-stack/main.c)
+
+### The Heap
+
+With C, we always need to do describe 2 things:
+
+- how large is the thing we're working with?
+- where do we put it? i.e. stack vs heap
+
+Generally, if we don't need dynamically allocated memory, the stack will be used.
+If we don't know upfront how much memory will be required, it usually indicates that
+we need to allocate memory on the heap.
+
+It's important to remember that arguments to functions is that they are _copied_.
+
+- Stack
+  - size is known ahead of time, _and_
+  - value exists only within the function in which it is defined
+- Heap
+  - size is unknown ahead of time, _or_
+  - return value isn't limited to one function
+
+When the life of a value exceeds that of the function that created it, it belongs,
+it needs to be allocated to the heap.
+
+To allocate to the heap:
+
+- we need `stdlib.h` to have access to `malloc`
+- `malloc` takes a size to determine how much memory to allocate to the heap
+- `malloc` returns a `void *` - a pointer to the memory location
+- we cast that pointer to the type we expect for the data type we're allocating
+  memory for
+- we use `free` to deallocate the memory when it's no longer required
+- once freed, although the pointer still exists, it should never be referenced.
+  It is a _dangling pointer_, pointing to now deallocated memory

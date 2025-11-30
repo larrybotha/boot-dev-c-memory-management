@@ -101,3 +101,7 @@ ch-06-03-example:
 
 ch-06-04-example:
     just watch 06/04-pointers-to-the-stack/main.c
+
+ch-06-05-test:
+    just watch 06/05-the-heap/test.c \
+      "06/05-the-heap/exercise.c munit/munit.c"
