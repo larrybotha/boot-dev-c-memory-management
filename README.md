@@ -570,6 +570,8 @@ To allocate to the heap:
 
 #### Malloc
 
+[./06/06-malloc/test.c](./06/06-malloc/test.c)
+
 - returns a pointer to an uninitialised memory location, or `NULL` if the allocation
   failed
 - that memory location contains whatever data was previously written to it
@@ -601,3 +603,15 @@ To allocate to the heap:
   - check that the returned pointer is not `NULL`
   - use the variable
   - `free` the memory to make it available to the OS again
+
+#### Free
+
+[./06/06-free/test.c](./06/06-free/main.c)
+
+`free` does one thing: it tells the OS that the memory that was previously allocated
+(i.e. reserved) for a variable is now available to be used again.
+
+It does not change the data at that memory location, and it doesn't change the
+address.
+
+Forgetting to free memory is where memory leaks come from.

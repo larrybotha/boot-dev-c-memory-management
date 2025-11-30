@@ -109,3 +109,7 @@ ch-06-05-test:
 ch-06-06-test:
     just watch 06/06-malloc/test.c \
       "06/06-malloc/exercise.c munit/munit.c"
+
+ch-06-07-example:
+    just watch 06/07-free/main.c \
+      "06/07-free/exercise.c"
