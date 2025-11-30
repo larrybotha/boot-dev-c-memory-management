@@ -58,11 +58,7 @@ int main(int argc, const char *argv[]) {
   };
 
   MunitSuite suite = {
-      "header-helpers",
-      tests,
-      NULL,
-      1,
-      (MunitSuiteOptions)MUNIT_TEST_OPTION_NONE,
+      "the-heap", tests, NULL, 1, (MunitSuiteOptions)MUNIT_TEST_OPTION_NONE,
   };
 
   return munit_suite_main(&suite, NULL, argc, (char *const *)argv);
