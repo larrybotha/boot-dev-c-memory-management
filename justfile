@@ -105,3 +105,7 @@ ch-06-04-example:
 ch-06-05-test:
     just watch 06/05-the-heap/test.c \
       "06/05-the-heap/exercise.c munit/munit.c"
+
+ch-06-06-test:
+    just watch 06/06-malloc/test.c \
+      "06/06-malloc/exercise.c munit/munit.c"

@@ -561,6 +561,43 @@ To allocate to the heap:
 - `malloc` returns a `void *` - a pointer to the memory location
 - we cast that pointer to the type we expect for the data type we're allocating
   memory for
-- we use `free` to deallocate the memory when it's no longer required
+- we use `free` to deallocate the memory when it's no longer required. Assignments to
+  the heap occupy OS resources, and failing to free prevents other processes running on
+  the OS to assign to that memory until the process that assigned the memory is
+  exited
 - once freed, although the pointer still exists, it should never be referenced.
   It is a _dangling pointer_, pointing to now deallocated memory
+
+#### Malloc
+
+- returns a pointer to an uninitialised memory location, or `NULL` if the allocation
+  failed
+- that memory location contains whatever data was previously written to it
+- it is the programmer's responsibility to deallocate the memory allocated via `malloc`
+- `calloc` allows for allocating memory _and_ assigning a zero value to the memory
+  location
+
+  - zeroing is not always free; `calloc` can be more expensive than `malloc`,
+    _but not always_
+
+  - `calloc` is the equivalent of allocating memory, and then zeroing:
+
+    ```c
+    int *xs = malloc(n * sizeof(int));
+
+    memset(xs, 0, n * sizeof(int));
+    ```
+
+    In this case, use `calloc`
+
+  - `calloc` does overflow checking that `malloc` doesn't
+  - `calloc` is required if the memory needs to zero-initialised
+  - in general, favour `calloc` over `malloc`, unless there are specific
+    performance requirements that justify using `malloc`, or you know you'll
+    immediately overwrite the data
+
+- the workflow for manual memory assignment is the following:
+  - assign using `malloc` or `calloc`
+  - check that the returned pointer is not `NULL`
+  - use the variable
+  - `free` the memory to make it available to the OS again
