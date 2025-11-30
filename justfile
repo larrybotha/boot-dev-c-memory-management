@@ -120,3 +120,7 @@ ch-07-01-test:
 
 ch-07-01-example:
     just watch 07/01-pointer-pointers/main.c
+
+ch-07-02-test:
+    just watch 07/02-array-of-pointers/test.c \
+      "07/02-array-of-pointers/exercise.c munit/munit.c"
