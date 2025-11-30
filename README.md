@@ -650,3 +650,61 @@ Little Endian
 
 Most modern systems store values using the little-endian
 ordering
+
+## Advanced pointers
+
+### Pointer pointers
+
+- [./07/01-pointer-pointers/test.c](./07/01-pointer-pointers/test.c)
+- [./07/01-pointer-pointers/main.c](./07/01-pointer-pointers/main.c)
+
+A pointer can point to another pointer:
+
+```c
+int main() {
+  int x = 42;
+  int *ptr_x = &x;
+  int **ptr_ptr_x = &ptr_x;
+}
+```
+
+It's important to think of pointer pointers using the fundamental data types:
+
+```c
+#include <stdlib.h>
+#include <stdio.h>
+
+int main() {
+  int *ptr = NULL; // address is 0x0
+
+  // pass the address of ptr to the function
+  alloc_int(&ptr, 10);
+}
+
+// We receive a pointer to a pointer. In this example:
+//  - ptr_ptr is the address of a pointer to an int
+//  - in this example, that address is 0x0 - the NULL pointer
+void alloc_int(int **ptr_ptr, int value) {
+  // We want the original pointer to point to a new value without affecting
+  // the value its location currently points to
+  // To do this, we
+  // 1. dereference ptr_ptr to get the original pointer
+  // 2. using malloc:
+  //    - allocate enough memory to store an int
+  //    - assign the pointer the return value of malloc, a new pointer
+  *ptr_ptr = malloc(sizeof(int));
+
+  // malloc may return NULL if the system is out of memory - bail if so
+  if (*ptr_ptr == NULL) {
+    fprintf(stderr, "unable to allocate memory\n");
+
+    return;
+  }
+
+  // At this point we know we can assign a value
+  //  - the original pointer now has a different address in memory
+  //  - we double-dereference ptr_ptr to 'access the value' in memory
+  //  - we assign the provided value
+  **ptr_ptr = n;
+}
+```

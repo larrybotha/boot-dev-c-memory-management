@@ -113,3 +113,10 @@ ch-06-06-test:
 ch-06-07-example:
     just watch 06/07-free/main.c \
       "06/07-free/exercise.c"
+
+ch-07-01-test:
+    just watch 07/01-pointer-pointers/test.c \
+      "07/01-pointer-pointers/exercise.c munit/munit.c"
+
+ch-07-01-example:
+    just watch 07/01-pointer-pointers/main.c
