@@ -1,8 +1,10 @@
+compiler:= if os() == "android" { "gcc" } else { "zig cc" }
+
 default:
     @just --list
 
 build in out deps="":
-    zig cc {{ in }} {{ deps }} -o {{ out }}
+    {{ compiler }} {{ in }} {{ deps }} -o {{ out }}
 
 watch in deps="" out="tmp":
     #!/usr/bin/env bash
