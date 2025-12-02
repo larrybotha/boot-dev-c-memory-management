@@ -1,4 +1,4 @@
-compiler:= if os() == "android" { "gcc" } else { "zig cc" }
+compiler := if os() == "android" { "gcc" } else { "zig cc" }
 
 default:
     @just --list
@@ -126,3 +126,10 @@ ch-07-01-example:
 ch-07-02-test:
     just watch 07/02-array-of-pointers/test.c \
       "07/02-array-of-pointers/exercise.c munit/munit.c"
+
+ch-07-03-test:
+    just watch 07/03-void-pointers/test.c \
+      "07/03-void-pointers/exercise.c munit/munit.c"
+
+ch-07-03-example:
+    just watch 07/03-void-pointers/main.c

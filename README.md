@@ -754,3 +754,30 @@ Can the value be negative?
     ├─ YES → Use size_t
     └─ NO → Consider uint32_t, uint64_t, or an int based on range/semantics
 ```
+
+### Void pointers
+
+See [./07/03-void-pointers/exercise.c](./07/03-void-pointers/exercise.c)
+
+Void pointers, `void *`, are also known as generic pointers - they
+can point to any value.
+
+They are a mechanism for polymorphism in C.
+
+Where a function expects a concrete type, a void pointer needs to be cast
+to the correct type:
+
+```c
+#include <stdio.h>
+
+int main() {
+  int x = 42;
+  void *ptr = &x;
+
+  // not allowed
+  printf("x is %d\n", *ptr);
+
+  // will work
+  printf("x is %d\n", *(int *)ptr);
+}
+```
