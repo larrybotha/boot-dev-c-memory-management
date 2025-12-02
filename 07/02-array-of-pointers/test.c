@@ -54,6 +54,25 @@ test_create_token_pointer_array_multiple(const MunitParameter params[],
   return MUNIT_OK;
 }
 
+MunitResult
+test_create_token_pointer_array_memory_allocation(const MunitParameter params[],
+                                                  void *user_data_or_fixture) {
+  token_t tokens[2] = {
+      {"foo", 1, 1},
+      {"bar", 2, 2},
+  };
+  token_t **result = create_token_pointer_array(tokens, 2);
+
+  munit_assert_not_null(result);
+  munit_assert_not_null(result[0]);
+  munit_assert_not_null(result[1]);
+  munit_assert_ptr_not_equal(result[0], result[1]);
+  munit_assert_ptr_not_equal(result[0], &tokens[0]);
+  munit_assert_ptr_not_equal(result[1], &tokens[1]);
+
+  return MUNIT_OK;
+}
+
 int main(int argc, char **argv) {
   MunitTest tests[] = {
       {
@@ -67,6 +86,14 @@ int main(int argc, char **argv) {
       {
           "/test_create_token_pointer_array_multiple",
           test_create_token_pointer_array_multiple,
+          NULL,
+          NULL,
+          MUNIT_TEST_OPTION_NONE,
+          NULL,
+      },
+      {
+          "/test_create_token_pointer_array_memory_allocation",
+          test_create_token_pointer_array_memory_allocation,
           NULL,
           NULL,
           MUNIT_TEST_OPTION_NONE,
