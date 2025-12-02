@@ -3,6 +3,12 @@
 
 #include "exercise.h"
 
+MunitResult test_null_pointer() {
+  snek_zero_out(NULL, 0);
+
+  return MUNIT_OK;
+}
+
 MunitResult test_zero_out_integer() {
   snek_int_t integer;
   integer.value = 42;
@@ -57,6 +63,14 @@ MunitResult test_zero_out_nonzero_values() {
 
 int main(int argc, char **argv) {
   MunitTest tests[] = {
+      {
+          "/test_null_pointer",
+          test_null_pointer,
+          NULL,
+          NULL,
+          MUNIT_TEST_OPTION_NONE,
+          NULL,
+      },
       {
           "/test_zero_out_integer",
           test_zero_out_integer,
