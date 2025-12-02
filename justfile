@@ -134,7 +134,10 @@ ch-07-03-test:
 ch-07-03-example:
     just watch 07/03-void-pointers/main.c
 
+ch-07-04-test:
+    just watch 07/04-swapping-integers/test.c \
+      "07/04-swapping-integers/exercise.c munit/munit.c"
+
 ch-08-01-test:
     just watch 08/01-low-level-stack/test.c \
       "08/01-low-level-stack/snekstack.c munit/munit.c"
-

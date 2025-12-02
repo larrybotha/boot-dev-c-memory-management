@@ -757,7 +757,8 @@ Can the value be negative?
 
 ### Void pointers
 
-See [./07/03-void-pointers/exercise.c](./07/03-void-pointers/exercise.c)
+- [./07/03-void-pointers/exercise.c](./07/03-void-pointers/exercise.c)
+- [./07/03-void-pointers/main.c](./07/03-void-pointers/main.c)
 
 Void pointers, `void *`, are also known as generic pointers - they
 can point to any value.
