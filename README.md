@@ -708,3 +708,49 @@ void alloc_int(int **ptr_ptr, int value) {
   **ptr_ptr = n;
 }
 ```
+
+_NOTE_: `size_t is useful when working with when to use `size_t` vs other numeric types:
+
+1. Representing sizes or counts of objects
+   in memory
+
+   - Array lengths, buffer sizes, element
+
+counts - Return values from sizeof() operator - Parameters to memory functions:
+malloc(), calloc(), memcpy(), etc. 2. Array indexing and iteration - Loop counters when iterating over
+arrays (as in your lines 14, 21) - Prevents comparison warnings with array
+bounds 3. Working with standard library functions
+that use size_t - strlen(), memcpy(), fread(), etc. all
+use size_t - Matching types prevents implicit
+conversions
+
+Why: size_t is guaranteed to hold the
+maximum size of any object. It's unsigned,
+so negative values are impossible (which
+makes sense for sizes).
+
+_SIDENOTE_:
+
+`size_t` gives us two guarantees
+
+- it's unsigned, so negative values are impossible
+- it will hold the maximum size of any object
+
+It's useful in the following scenarios:
+
+- representing counts of objects in memory, i.e.
+  - array lengths, buffer sizes, element counts
+  - the return value of `sizeof`
+  - parameters to `malloc`, `calloc`, `memcpy`
+- array indexing and loop counters
+- working with standard lib functions, such as `strlen`, `fread`
+
+When to use `size_t`:
+
+```text
+Can the value be negative?
+├─ YES → Use a signed type (int, ssize_t, ptrdiff_t)
+└─ NO → Is it a size/count/index?
+    ├─ YES → Use size_t
+    └─ NO → Consider uint32_t, uint64_t, or an int based on range/semantics
+```

@@ -34,7 +34,7 @@ test_create_token_pointer_array_multiple(const MunitParameter params[],
 
   munit_assert_not_null(result);
 
-  for (int i = 0; i < 3; i++) {
+  for (size_t i = 0; i < 3; i++) {
     int line = i + 1;
     int column = line;
 
@@ -45,7 +45,7 @@ test_create_token_pointer_array_multiple(const MunitParameter params[],
     munit_assert_ptr_not_equal(result[i], &tokens[i]);
   }
 
-  for (int i = 0; i < 3; i++) {
+  for (size_t i = 0; i < 3; i++) {
     free(result[i]);
   }
 
