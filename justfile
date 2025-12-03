@@ -142,6 +142,13 @@ ch-07-05-test:
     just watch 07/05-swapping-strings/test.c \
       "07/05-swapping-strings/exercise.c munit/munit.c"
 
+ch-07-06-test:
+    just watch 07/06-generic-swap/test.c \
+      "07/06-generic-swap/exercise.c munit/munit.c"
+
+ch-07-06-example:
+    just watch 07/06-generic-swap/main.c
+
 ch-08-01-test:
     just watch 08/01-low-level-stack/test.c \
       "08/01-low-level-stack/snekstack.c munit/munit.c"

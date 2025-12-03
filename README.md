@@ -782,3 +782,25 @@ int main() {
   printf("x is %d\n", *(int *)ptr);
 }
 ```
+
+### Swapping
+
+- [./07/04-swapping-integers/](./07/04-swapping-integers/exercise.c)
+- [./07/05-swapping-strings/](./07/05-swapping-strings/exercise.c)
+- [./07/06-generic-swap/exercise.c](./07/06-generic-swap/exercise.c)
+- [./07/06-generic-swap/main.c](./07/06-generic-swap/main.c)
+
+`<string.h>`'s `memcpy` allows for generically copying values to other locations
+in memory without knowing the type, e.g. when working with `void *`:
+
+```c
+#include <string.h>
+
+int main() {
+  int x = 1;
+  int y = 2;
+  void *ptr_y = &y;
+
+  memcpy(&x, ptr_y, sizeof(int));
+}
+```
