@@ -15,6 +15,14 @@ MunitResult test_free_stack() {
   return MUNIT_OK;
 }
 
+MunitResult test_free_stack_on_null() {
+  snek_stack_t *result = NULL;
+
+  free_stack(&result);
+
+  return MUNIT_OK;
+}
+
 MunitResult test_create_stack_small() {
   snek_stack_t *s = alloc_stack(3);
 
@@ -44,6 +52,14 @@ int main(int argc, char **argv) {
       {
           "/test_free_stack",
           test_free_stack,
+          NULL,
+          NULL,
+          MUNIT_TEST_OPTION_NONE,
+          NULL,
+      },
+      {
+          "/test_free_stack_on_null",
+          test_free_stack_on_null,
           NULL,
           NULL,
           MUNIT_TEST_OPTION_NONE,

@@ -26,11 +26,12 @@ snek_stack_t *alloc_stack(size_t cap) {
 }
 
 void free_stack(snek_stack_t **ptr) {
+  if (!*ptr) {
+    return;
+  }
+
   // dereference the pointer _before_ accessing its field
   free((*ptr)->data);
-
-  // assign NULL _before_ freeing *ptr, otherwise we are accessing
-  // free memory
   (*ptr)->data = NULL;
 
   free(*ptr);
