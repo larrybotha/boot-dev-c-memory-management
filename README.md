@@ -793,7 +793,7 @@ int main() {
 `<string.h>`'s `memcpy` allows for generically copying values to other locations
 in memory without knowing the type, e.g. when working with `void *`:
 
-```c
+````c
 #include <string.h>
 
 int main() {
@@ -803,4 +803,14 @@ int main() {
 
   memcpy(&x, ptr_y, sizeof(int));
 }
-```
+## Stack data structure```
+
+- every allocation of memory requires a free in the reverse order
+  e.g. function `alloc_x` returns a pointer containing a pointer, then it
+  should be accompanied by `free_x` which frees first the contained pointer,
+  followed by the containing pointer
+- to free a pointer, a pointer to that pointer should be passed to the utility.
+  When mutating a struct, we pass a pointer to the struct - the same applies
+  with pointers - to mutate the pointer, i.e. free it, we pass a pointer to the
+  pointer, and dereference it within the `free`
+````
