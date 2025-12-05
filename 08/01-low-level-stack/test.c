@@ -1,30 +1,54 @@
 #include "../../munit/munit.h"
+#include <stdio.h>
 
 #include "snekstack.h"
 
-MunitResult test_create_stack_small() {
+MunitResult test_free_stack() {
+  snek_stack_t *result = alloc_stack(1);
 
-  stack_t *s = alloc_stack(3);
+  munit_assert_ptr_not_null(result);
+
+  free_stack(&result);
+
+  munit_assert_ptr_null(result);
+
+  return MUNIT_OK;
+}
+
+MunitResult test_create_stack_small() {
+  snek_stack_t *s = alloc_stack(3);
 
   munit_assert_int(s->capacity, ==, 3);
   munit_assert_int(s->count, ==, 0);
   munit_assert_ptr_not_null(s->data);
 
+  free_stack(&s);
+
   return MUNIT_OK;
 }
 
 MunitResult test_create_stack_large() {
-  stack_t *s = alloc_stack(100);
+  snek_stack_t *s = alloc_stack(100);
 
   munit_assert_int(s->capacity, ==, 100);
   munit_assert_int(s->count, ==, 0);
   munit_assert_ptr_not_null(s->data);
+
+  free_stack(&s);
 
   return MUNIT_OK;
 }
 
 int main(int argc, char **argv) {
   MunitTest tests[] = {
+      {
+          "/test_free_stack",
+          test_free_stack,
+          NULL,
+          NULL,
+          MUNIT_TEST_OPTION_NONE,
+          NULL,
+      },
       {
           "/test_create_stack_small",
           test_create_stack_small,
