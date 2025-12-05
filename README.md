@@ -813,4 +813,24 @@ int main() {
   When mutating a struct, we pass a pointer to the struct - the same applies
   with pointers - to mutate the pointer, i.e. free it, we pass a pointer to the
   pointer, and dereference it within the `free`
+
+Distinguishing between a pointer to an array of pointers, vs a pointer to a pointer:
+
+- pointer to pointer
+  ```c
+  void *single_pointer;
+  void **modify_me = &single_pointer;
+  ```
+  - purpose: modify caller's pointer variable
+  - location: stack (if single_pointer is stack-allocated)
+  - size: fixed (`sizeof(void *)`)
+
+- pointer to array pattern
+  ```c
+  void **array_of_ptrs = calloc(count, sizeof(void*));
+  ```
+  - purpose: store multiple pointers in dynamic array
+  - location: heap
+  - size: dynamic (`count _ sizeof(void_)`)
+  - usage: `array_of_ptrs[i] = some_pointer;`
 ````
