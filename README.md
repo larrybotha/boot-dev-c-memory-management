@@ -793,7 +793,7 @@ int main() {
 `<string.h>`'s `memcpy` allows for generically copying values to other locations
 in memory without knowing the type, e.g. when working with `void *`:
 
-````c
+```c
 #include <string.h>
 
 int main() {
@@ -803,7 +803,9 @@ int main() {
 
   memcpy(&x, ptr_y, sizeof(int));
 }
-## Stack data structure```
+```
+
+## Stack data structure
 
 - every allocation of memory requires a free in the reverse order
   e.g. function `alloc_x` returns a pointer containing a pointer, then it
@@ -817,20 +819,23 @@ int main() {
 Distinguishing between a pointer to an array of pointers, vs a pointer to a pointer:
 
 - pointer to pointer
+
   ```c
   void *single_pointer;
   void **modify_me = &single_pointer;
   ```
+
   - purpose: modify caller's pointer variable
   - location: stack (if single_pointer is stack-allocated)
   - size: fixed (`sizeof(void *)`)
 
 - pointer to array pattern
+
   ```c
   void **array_of_ptrs = calloc(count, sizeof(void*));
   ```
+
   - purpose: store multiple pointers in dynamic array
   - location: heap
   - size: dynamic (`count _ sizeof(void_)`)
   - usage: `array_of_ptrs[i] = some_pointer;`
-````
