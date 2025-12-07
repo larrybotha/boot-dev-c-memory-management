@@ -152,3 +152,7 @@ ch-07-06-example:
 ch-08-01-test:
     just watch 08/01-low-level-stack/test.c \
       "08/01-low-level-stack/snekstack.c munit/munit.c"
+
+ch-08-02-test:
+    just watch 08/02-stack-push/test.c \
+      "08/02-stack-push/snekstack.c munit/munit.c"
