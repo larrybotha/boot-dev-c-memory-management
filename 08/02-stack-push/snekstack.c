@@ -52,6 +52,9 @@ void push_stack(snek_stack_t *stack, void *x) {
     stack->data = realloc(stack->data, stack->capacity * sizeof(*stack->data));
 
     if (!stack->data) {
+      // realloc failed, restore capacity
+      stack->capacity = cap;
+
       return;
     }
   }
