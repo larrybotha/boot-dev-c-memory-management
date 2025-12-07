@@ -18,7 +18,6 @@ snek_stack_t *alloc_stack(size_t capacity) {
 
   if (!result->data) {
     free(result);
-    result = NULL;
 
     return NULL;
   }
@@ -47,18 +46,26 @@ void push_stack(snek_stack_t *stack, void *x) {
     // WRONG: use realloc to update memory size
     /*free(stack->data);*/
     /*stack->data = calloc(cap, sizeof(*stack->data));*/
-    stack->data = realloc(stack->data, sizeof(*stack->data));
+    // WRONG: we need to allocate sufficient space for 'capacity' times
+    // number of pointers
+    /*stack->data = realloc(stack->data, sizeof(*stack->data));*/
+    stack->data = realloc(stack->data, stack->capacity * sizeof(*stack->data));
 
     if (!stack->data) {
       return;
     }
   }
 
-  stack->data[count] = calloc(1, sizeof((void *)x));
-
-  if (stack->data[count] == NULL) {
-    return;
-  }
+  // WRONG: it's redundant to assign memory for the items in the
+  // array:
+  // - the array is already a list of pointers, and
+  // - we have received x _as a pointer_
+  //
+  // Because of this, we can assign x directly to the index
+  /*stack->data[count] = calloc(1, sizeof((void *)x));*/
+  /*if (stack->data[count] == NULL) {*/
+  /*  return;*/
+  /*}*/
 
   stack->data[count] = x;
   stack->count += 1;
