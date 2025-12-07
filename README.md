@@ -815,6 +815,8 @@ int main() {
   When mutating a struct, we pass a pointer to the struct - the same applies
   with pointers - to mutate the pointer, i.e. free it, we pass a pointer to the
   pointer, and dereference it within the `free`
+- `realloc` allows for resizing the number of bytes a block of memory was initially
+  assigned
 
 Distinguishing between a pointer to an array of pointers, vs a pointer to a pointer:
 
@@ -839,3 +841,23 @@ Distinguishing between a pointer to an array of pointers, vs a pointer to a poin
   - location: heap
   - size: dynamic (`count _ sizeof(void_)`)
   - usage: `array_of_ptrs[i] = some_pointer;`
+
+The context of types is important for interpretation:
+
+- function parameters:
+  - `int main(int argc, const char **argv)`
+    - pointer to a pointer to a const char
+  - `int main(int argc, const char *argv[])`
+    - array notation that _decays_ to: pointer to a pointer to const char
+    - equivalent to `const char **argv`
+    - improves readability for devs, i.e. _array of strings_
+  - both compile to the same parameter type
+- variable assignment:
+  - `const char **xs`
+    - a pointer to a pointer to a const char
+    - `sizeof(xs)`: the size of the pointer
+    - typically 8 bytes
+  - `const char *xs[10]`
+    - array of 10 pointers to const char
+    - `sizeof(xs)`: 10 x `sizeof(char *)`
+    - typically 80 bytes
