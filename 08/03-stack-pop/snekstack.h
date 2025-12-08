@@ -8,6 +8,6 @@ typedef struct SnekStack {
 } snek_stack_t;
 
 snek_stack_t *alloc_stack(size_t cap);
-void free_stack(snek_stack_t **ptr);
-void push_stack(snek_stack_t *ptr, const void *x);
-void pop_stack(snek_stack_t *ptr);
+void free_stack(snek_stack_t **stack);
+void push_stack(snek_stack_t *stack, const void *x);
+void pop_stack(snek_stack_t *stack);

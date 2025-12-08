@@ -24,66 +24,66 @@ snek_stack_t *alloc_stack(size_t cap) {
   return result;
 }
 
-void free_stack(snek_stack_t **ptr) {
-  if (!*ptr) {
+void free_stack(snek_stack_t **stack) {
+  if (!*stack) {
     return;
   }
 
-  free((*ptr)->data);
-  (*ptr)->data = NULL;
+  free((*stack)->data);
+  (*stack)->data = NULL;
 
-  free(*ptr);
-  *ptr = NULL;
+  free(*stack);
+  *stack = NULL;
 }
 
-void push_stack(snek_stack_t *ptr, const void *x) {
-  if (!ptr) {
+void push_stack(snek_stack_t *stack, const void *x) {
+  if (!stack) {
     return;
   }
 
-  size_t cap = ptr->capacity;
-  size_t count = ptr->count;
+  size_t cap = stack->capacity;
+  size_t count = stack->count;
 
   if (count == cap && cap > 0) {
-    ptr->capacity = GROWTH_FACTOR * cap;
-    ptr->data = realloc(ptr->data, ptr->capacity * sizeof(*ptr->data));
+    stack->capacity = GROWTH_FACTOR * cap;
+    stack->data = realloc(stack->data, stack->capacity * sizeof(*stack->data));
 
-    if (!ptr->data) {
-      ptr->capacity = cap;
+    if (!stack->data) {
+      stack->capacity = cap;
 
       return;
     }
   }
 
-  ptr->data[count] = (void *)x;
-  ptr->count += 1;
+  stack->data[count] = (void *)x;
+  stack->count += 1;
 }
 
-void pop_stack(snek_stack_t *ptr) {
-  if (!ptr) {
+void pop_stack(snek_stack_t *stack) {
+  if (!stack) {
     return;
   }
 
-  size_t count = ptr->count;
-  size_t cap_orig = ptr->capacity;
+  size_t count = stack->count;
+  size_t cap_orig = stack->capacity;
 
   if (count == 0) {
     return;
   }
 
-  ptr->data[count - 1] = NULL;
-  ptr->count -= 1;
+  stack->data[count - 1] = NULL;
+  stack->count -= 1;
 
-  if (ptr->count > cap_orig / GROWTH_FACTOR) {
+  if (stack->count > cap_orig / GROWTH_FACTOR) {
     return;
   }
 
   if (cap_orig > 1) {
-    ptr->capacity /= GROWTH_FACTOR;
-    ptr->data = realloc(ptr->data, ptr->capacity * sizeof(*ptr->data));
+    stack->capacity /= GROWTH_FACTOR;
+    stack->data = realloc(stack->data, stack->capacity * sizeof(*stack->data));
 
-    if (!ptr->data) {
-      ptr->capacity = cap_orig;
+    if (!stack->data) {
+      stack->capacity = cap_orig;
     }
   }
 }
