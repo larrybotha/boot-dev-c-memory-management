@@ -25,6 +25,10 @@ snek_stack_t *alloc_stack(size_t cap) {
 }
 
 void free_stack(snek_stack_t **ptr) {
+  if (!*ptr) {
+    return;
+  }
+
   free((*ptr)->data);
   (*ptr)->data = NULL;
 
@@ -56,6 +60,10 @@ void push_stack(snek_stack_t *ptr, void *x) {
 }
 
 void pop_stack(snek_stack_t *ptr) {
+  if (!ptr) {
+    return;
+  }
+
   size_t count = ptr->count;
   size_t cap_orig = ptr->capacity;
 
