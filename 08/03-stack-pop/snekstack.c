@@ -2,6 +2,8 @@
 
 #include "snekstack.h"
 
+#define GROWTH_FACTOR 2
+
 snek_stack_t *alloc_stack(size_t cap) {
   snek_stack_t *result = calloc(1, sizeof(*result));
 
@@ -39,7 +41,7 @@ void push_stack(snek_stack_t *ptr, void *x) {
   size_t count = ptr->count;
 
   if (count == cap) {
-    ptr->capacity = 2 * cap;
+    ptr->capacity = GROWTH_FACTOR * cap;
     ptr->data = realloc(ptr->data, ptr->capacity * sizeof(*ptr->data));
 
     if (!ptr->data) {
@@ -55,6 +57,7 @@ void push_stack(snek_stack_t *ptr, void *x) {
 
 void pop_stack(snek_stack_t *ptr) {
   size_t count = ptr->count;
+  size_t cap_orig = ptr->capacity;
 
   if (count == 0) {
     return;
@@ -63,16 +66,16 @@ void pop_stack(snek_stack_t *ptr) {
   ptr->data[count - 1] = NULL;
   ptr->count -= 1;
 
-  if (ptr->count > ptr->capacity / 2) {
+  if (ptr->count > cap_orig / GROWTH_FACTOR) {
     return;
   }
 
-  if (ptr->capacity > 1) {
-    ptr->capacity /= 2;
+  if (cap_orig > 1) {
+    ptr->capacity /= GROWTH_FACTOR;
     ptr->data = realloc(ptr->data, ptr->capacity * sizeof(*ptr->data));
 
     if (!ptr->data) {
-      ptr->capacity *= 2;
+      ptr->capacity = cap_orig;
     }
   }
 }
