@@ -36,7 +36,7 @@ void free_stack(snek_stack_t **ptr) {
   *ptr = NULL;
 }
 
-void push_stack(snek_stack_t *ptr, void *x) {
+void push_stack(snek_stack_t *ptr, const void *x) {
   if (!ptr) {
     return;
   }
@@ -55,7 +55,7 @@ void push_stack(snek_stack_t *ptr, void *x) {
     }
   }
 
-  ptr->data[count] = x;
+  ptr->data[count] = (void *)x;
   ptr->count += 1;
 }
 
