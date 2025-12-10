@@ -65,12 +65,15 @@ void *pop_stack(snek_stack_t *stack) {
   stack->count -= 1;
 
   if (stack->count > 0 && stack->count <= stack->capacity / 2) {
-    stack->capacity /= GROWTH_FACTOR;
-    stack->data = realloc(stack->data, stack->capacity * sizeof(stack->data));
+    size_t new_cap = stack->capacity / GROWTH_FACTOR;
+    void **new_data = realloc(stack->data, new_cap * sizeof(stack->data));
 
-    if (!stack->data) {
-      stack->capacity *= GROWTH_FACTOR;
+    if (!new_data) {
+      return NULL;
     }
+
+    stack->capacity = new_cap;
+    stack->data = new_data;
   }
 
   return x;
