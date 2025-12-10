@@ -26,10 +26,8 @@ void push_stack(snek_stack_t *stack, void *value) {
     return;
   }
 
-  size_t count = stack->count;
-  size_t cap = stack->capacity;
-
-  if (count == cap) {
+  if (stack->count == stack->capacity) {
+    size_t cap = stack->capacity;
     size_t new_cap = cap * GROWTH_FACTOR;
     void **new_data = realloc(stack->data, new_cap * sizeof(*stack->data));
 
@@ -43,7 +41,7 @@ void push_stack(snek_stack_t *stack, void *value) {
     stack->data = new_data;
   }
 
-  stack->data[count] = value;
+  stack->data[stack->count] = value;
   stack->count += 1;
 }
 
@@ -64,20 +62,19 @@ void *pop_stack(snek_stack_t *stack) {
     return NULL;
   }
 
-  void *x = stack->data[stack->count - 1];
-  stack->count -= 1;
-
-  if (stack->count > 0 && stack->count <= stack->capacity / GROWTH_FACTOR) {
+  if (stack->capacity > 1 && stack->count <= stack->capacity / GROWTH_FACTOR) {
     size_t new_cap = stack->capacity / GROWTH_FACTOR;
     void **new_data = realloc(stack->data, new_cap * sizeof(*stack->data));
 
     if (!new_data) {
-      return x;
+      return NULL;
     }
 
     stack->capacity = new_cap;
     stack->data = new_data;
   }
 
-  return x;
+  stack->count -= 1;
+
+  return stack->data[stack->count];
 }
