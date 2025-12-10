@@ -30,14 +30,17 @@ void push_stack(snek_stack_t *stack, void *value) {
   size_t cap = stack->capacity;
 
   if (count == cap) {
-    stack->capacity = cap * GROWTH_FACTOR;
-    stack->data = realloc(stack->data, stack->capacity * sizeof(*stack->data));
+    size_t new_cap = cap * GROWTH_FACTOR;
+    void **new_data = realloc(stack->data, new_cap * sizeof(*stack->data));
 
-    if (!stack->data) {
+    if (!new_data) {
       stack->capacity = cap;
 
       return;
     }
+
+    stack->capacity = new_cap;
+    stack->data = new_data;
   }
 
   stack->data[count] = value;
