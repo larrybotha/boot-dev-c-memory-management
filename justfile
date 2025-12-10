@@ -160,3 +160,7 @@ ch-08-02-test:
 ch-08-03-test:
     just watch 08/03-stack-pop/test.c \
       "08/03-stack-pop/snekstack.c munit/munit.c"
+
+ch-08-04-test:
+    just watch 08/04-stack-free/test.c \
+      "08/04-stack-free/snekstack.c munit/munit.c"
