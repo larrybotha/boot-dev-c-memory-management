@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdlib.h>
-#define GROWTH_FACTOR 2;
+#define GROWTH_FACTOR 2
 
 typedef struct SnekStack {
   size_t capacity;
