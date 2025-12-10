@@ -69,7 +69,7 @@ void *pop_stack(snek_stack_t *stack) {
     void **new_data = realloc(stack->data, new_cap * sizeof(*stack->data));
 
     if (!new_data) {
-      return NULL;
+      return x;
     }
 
     stack->capacity = new_cap;
